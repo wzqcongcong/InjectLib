@@ -34,9 +34,7 @@ NSString* DYLIB_PATH;
 #define ARMV7 9
 #define ARMV6 6
 
-unsigned long b_round(
-                      unsigned long v,
-                      unsigned long r)
+unsigned long b_round(unsigned long v, unsigned long r)
 {
     r--;
     v += r;
@@ -44,7 +42,8 @@ unsigned long b_round(
     return(v);
 }
 
-void inject_dylib(FILE* newFile, uint32_t top) {
+void inject_dylib(FILE* newFile, uint32_t top)
+{
     fseek(newFile, top, SEEK_SET);
     struct mach_header mach;
     
@@ -61,14 +60,14 @@ void inject_dylib(FILE* newFile, uint32_t top) {
     
     fseek(newFile, -sizeof(struct mach_header), SEEK_CUR);
     fwrite(&mach, sizeof(struct mach_header), 1, newFile);
-    NSLog(@"Patching mach_header..\n");
+    NSLog(@"Patching mach_header...\n");
     
     fseek(newFile, sizeofcmds, SEEK_CUR);
     
     struct dylib_command dyld;
     fread(&dyld, sizeof(struct dylib_command), 1, newFile);
     
-    NSLog(@"Attaching dylib..\n\n");
+    NSLog(@"Attaching dylib...\n\n");
     
     dyld.cmd = LC_LOAD_DYLIB;
     dyld.cmdsize = dylib_size;
@@ -81,30 +80,21 @@ void inject_dylib(FILE* newFile, uint32_t top) {
     fwrite(&dyld, sizeof(struct dylib_command), 1, newFile);
     
     fwrite([data bytes], [data length], 1, newFile);
-    
 }
 
-void inject_dylib_64(FILE* newFile, uint32_t top) {
+void inject_dylib_64(FILE* newFile, uint32_t top)
+{
     @autoreleasepool {
         fseek(newFile, top, SEEK_SET);
         struct mach_header_64 mach;
-        
-        
+
         fread(&mach, sizeof(struct mach_header_64), 1, newFile);
         
         NSData* data = [DYLIB_PATH dataUsingEncoding:NSUTF8StringEncoding];
-        
-        
+
         unsigned long dylib_size = sizeof(struct dylib_command) + b_round(strlen([DYLIB_PATH UTF8String]) + 1, 8);
-        
-        
-        //round(strlen([DYLIB_PATH UTF8String]) + 1, sizeof(long));
+
         NSLog(@"dylib size wow %lu", dylib_size);
-        /*uint32_t dylib_size2 = (uint32_t)[data length] + sizeof(struct dylib_command);
-         dylib_size2 += sizeof(long) - (dylib_size % sizeof(long)); // load commands like to be aligned by long
-         
-         NSLog(@"dylib size2 wow %u", dylib_size2);
-         NSLog(@"dylib size2 wow %u", CFSwapInt32(dylib_size2));*/
         
         NSLog(@"mach.ncmds %u", mach.ncmds);
         
@@ -117,14 +107,14 @@ void inject_dylib_64(FILE* newFile, uint32_t top) {
         
         fseek(newFile, -sizeof(struct mach_header_64), SEEK_CUR);
         fwrite(&mach, sizeof(struct mach_header_64), 1, newFile);
-        NSLog(@"Patching mach_header..\n");
+        NSLog(@"Patching mach_header...\n");
         
         fseek(newFile, sizeofcmds, SEEK_CUR);
         
         struct dylib_command dyld;
         fread(&dyld, sizeof(struct dylib_command), 1, newFile);
         
-        NSLog(@"Attaching dylib..\n\n");
+        NSLog(@"Attaching dylib...\n\n");
         
         dyld.cmd = LC_LOAD_DYLIB;
         dyld.cmdsize = (uint32_t) dylib_size;
@@ -141,18 +131,16 @@ void inject_dylib_64(FILE* newFile, uint32_t top) {
     }
 }
 
-
 void inject_file(NSString* file, NSString* _dylib)
 {
     char buffer[4096], binary[4096], dylib[4096];
-    
-    
+
     strlcpy(binary, [file UTF8String], sizeof(binary));
     strlcpy(dylib, [DYLIB_PATH UTF8String], sizeof(dylib));
     
-    NSLog(@"dylib path %@", DYLIB_PATH);
+    NSLog(@"dylib path: %@", DYLIB_PATH);
     FILE *binaryFile = fopen(binary, "r+");
-    printf("Reading binary: %s\n\n", binary);
+    NSLog(@"Reading binary: %s\n\n", binary);
     fread(&buffer, sizeof(buffer), 1, binaryFile);
     
     struct fat_header* fh = (struct fat_header*) (buffer);
@@ -169,8 +157,7 @@ void inject_file(NSString* file, NSString* _dylib)
                 if (CFSwapInt32(arch->cputype) == CPU_TYPE_ARM64) {
                     NSLog(@"64bit arch wow");
                     inject_dylib_64(binaryFile, CFSwapInt32(arch->offset));
-                }
-                else {
+                } else {
                     inject_dylib(binaryFile, CFSwapInt32(arch->offset));
                 }
                 arch++;
@@ -193,24 +180,42 @@ void inject_file(NSString* file, NSString* _dylib)
         }
         default:
         {
-            printf("Error: Unknown architecture detected");
+            NSLog(@"Error: Unknown architecture detected");
             exit(1);
         }
     }
     
-    NSLog(@"complete!");
+    NSLog(@"Injection completed!");
     fclose(binaryFile);
+}
+
+void help_and_exit(NSString* cmd)
+{
+    NSLog(@"Usage: 1. %@ binary_path dylib_path\n", cmd);
+    NSLog(@"       2. copy dylib into folder where binary stays\n");
+    NSLog(@"       3. resign dylib and binary if needed\n");
+    exit(1);
 }
 
 int main(int argc, const char * argv[])
 {
-    NSString* binary = [NSString stringWithUTF8String:argv[1]];
-    NSString* dylib = [NSString stringWithUTF8String:argv[2]];
+    NSString* cmd = [[NSString stringWithUTF8String:argv[0]] lastPathComponent];
+
+    if (argc != 2) {
+        help_and_exit(cmd);
+    }
+
+    NSString* binary_path = [NSString stringWithUTF8String:argv[1]];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:binary_path]) {
+        help_and_exit(cmd);
+    }
+
+    NSString* dylib_path = [NSString stringWithUTF8String:argv[2]];
+    NSString* dylib = [dylib_path lastPathComponent];
     DYLIB_PATH = [NSString stringWithFormat:@"@executable_path/%@", dylib];
-    NSLog(@"dylib path %@", DYLIB_PATH);
-    
-    inject_file(binary, DYLIB_PATH);
-    
+
+    inject_file(binary_path, DYLIB_PATH);
+
     return 0;
 }
 

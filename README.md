@@ -1,8 +1,8 @@
 
 ## Usage
 
-* `injectLib binary_path dylib_path`
+1. `injectLib binary_path dylib_path`
 
-* copy dylib into folder where binary stays
+2. copy dylib into folder where binary stays
 
-* resign dylib and binary if needed
+3. resign dylib and binary if needed

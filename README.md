@@ -1,12 +1,8 @@
-yololib
-=======
 
-dylib injector for mach-o binaries
+## Usage
 
+* `injectLib binary_path dylib_path`
 
-Usage
-============
+* copy dylib into folder where binary stays
 
-Self-explainatory
-
-`yololib` `binary` `dylib file`
+* resign dylib and binary if needed

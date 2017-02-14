@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/GoKu/Tools/Injection/InjectLib/injectLib.xcodeproj">
+      location = "self:/Users/GoKu/Tools/Injection/injectLib/inject_lib.xcodeproj">
    </FileRef>
 </Workspace>

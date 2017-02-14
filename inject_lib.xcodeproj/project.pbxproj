@@ -24,7 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AD49F4E51769B63A00B8D2E0 /* injectLib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = injectLib; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD49F4E51769B63A00B8D2E0 /* inject_lib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = inject_lib; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD4A0D561949A42E00B6B127 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD4A0D581949AA5B00B6B127 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,7 +53,7 @@
 		AD49F4E61769B63A00B8D2E0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AD49F4E51769B63A00B8D2E0 /* injectLib */,
+				AD49F4E51769B63A00B8D2E0 /* inject_lib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AD49F4E41769B63900B8D2E0 /* injectLib */ = {
+		AD49F4E41769B63900B8D2E0 /* inject_lib */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AD49F4EE1769B63A00B8D2E0 /* Build configuration list for PBXNativeTarget "injectLib" */;
+			buildConfigurationList = AD49F4EE1769B63A00B8D2E0 /* Build configuration list for PBXNativeTarget "inject_lib" */;
 			buildPhases = (
 				AD49F4E11769B63900B8D2E0 /* Sources */,
 				AD49F4E21769B63900B8D2E0 /* Frameworks */,
@@ -73,9 +73,9 @@
 			);
 			dependencies = (
 			);
-			name = injectLib;
+			name = inject_lib;
 			productName = yololib;
-			productReference = AD49F4E51769B63A00B8D2E0 /* injectLib */;
+			productReference = AD49F4E51769B63A00B8D2E0 /* inject_lib */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -85,9 +85,9 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = test;
+				ORGANIZATIONNAME = com.gokustudio;
 			};
-			buildConfigurationList = AD49F4E01769B63900B8D2E0 /* Build configuration list for PBXProject "injectLib" */;
+			buildConfigurationList = AD49F4E01769B63900B8D2E0 /* Build configuration list for PBXProject "inject_lib" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AD49F4E41769B63900B8D2E0 /* injectLib */,
+				AD49F4E41769B63900B8D2E0 /* inject_lib */,
 			);
 		};
 /* End PBXProject section */
@@ -179,7 +179,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: ZongQuan Wang (VWE2C42C86)";
-				PRODUCT_NAME = injectLib;
+				PRODUCT_NAME = inject_lib;
 			};
 			name = Debug;
 		};
@@ -188,14 +188,14 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: ZongQuan Wang (VWE2C42C86)";
-				PRODUCT_NAME = injectLib;
+				PRODUCT_NAME = inject_lib;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AD49F4E01769B63900B8D2E0 /* Build configuration list for PBXProject "injectLib" */ = {
+		AD49F4E01769B63900B8D2E0 /* Build configuration list for PBXProject "inject_lib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AD49F4EC1769B63A00B8D2E0 /* Debug */,
@@ -204,7 +204,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AD49F4EE1769B63A00B8D2E0 /* Build configuration list for PBXNativeTarget "injectLib" */ = {
+		AD49F4EE1769B63A00B8D2E0 /* Build configuration list for PBXNativeTarget "inject_lib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AD49F4EF1769B63A00B8D2E0 /* Debug */,

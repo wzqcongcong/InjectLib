@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AD49F4E41769B63900B8D2E0"
-               BuildableName = "injectLib"
-               BlueprintName = "injectLib"
-               ReferencedContainer = "container:injectLib.xcodeproj">
+               BuildableName = "inject_lib"
+               BlueprintName = "inject_lib"
+               ReferencedContainer = "container:inject_lib.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AD49F4E41769B63900B8D2E0"
-            BuildableName = "injectLib"
-            BlueprintName = "injectLib"
-            ReferencedContainer = "container:injectLib.xcodeproj">
+            BuildableName = "inject_lib"
+            BlueprintName = "inject_lib"
+            ReferencedContainer = "container:inject_lib.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AD49F4E41769B63900B8D2E0"
-            BuildableName = "injectLib"
-            BlueprintName = "injectLib"
-            ReferencedContainer = "container:injectLib.xcodeproj">
+            BuildableName = "inject_lib"
+            BlueprintName = "inject_lib"
+            ReferencedContainer = "container:inject_lib.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AD49F4E41769B63900B8D2E0"
-            BuildableName = "injectLib"
-            BlueprintName = "injectLib"
-            ReferencedContainer = "container:injectLib.xcodeproj">
+            BuildableName = "inject_lib"
+            BlueprintName = "inject_lib"
+            ReferencedContainer = "container:inject_lib.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
